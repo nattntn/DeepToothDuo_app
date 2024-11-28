@@ -76,6 +76,15 @@ import os
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 #-------------------------------------------------------------------------------------
+# เพิ่ม Open Graph Metadata
+st.markdown("""
+<head>
+    <meta property="og:title" content="DeeptoothDuo: AI for Dental X-rays" />
+    <meta property="og:description" content="Estimate age and sex from panoramic dental X-rays." />
+    <meta property="og:image" content=".Doc/logo1.svg" />
+    <meta property="og:url" content="https://deeptoothduo.streamlit.app/" />
+</head>
+""", unsafe_allow_html=True)
 
 
 # UI
