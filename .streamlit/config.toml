@@ -1,0 +1,7 @@
+[theme]
+base = "dark"                     # ใช้โหมดมืด
+primaryColor = "#ffffff"          # สีหลัก (ปุ่ม/ลิงก์)
+backgroundColor = "#1e1e2e"       # พื้นหลังหลัก
+secondaryBackgroundColor = "#252530"  # พื้นหลังรอง (สำหรับ widgets)
+textColor = "#ffffff"             # สีข้อความ
+font = "sans serif"               # ฟอนต์
