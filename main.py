@@ -39,12 +39,17 @@ def predict_image(img, session, height, width):
 #-----------------------------------------------------------------------------------------------------------------------------------
 #หาค่า confident
 def calculate_confident(value):
-    if value >= 0.5: #male
+    if value >= 0.5:  # male
         confident = value
     else:
-        confident = 1 - value #female
-    return confident
+        confident = 1 - value  # female
 
+    # Adjust confidence if it exceeds 95%
+    confident_percentage = confident * 100
+    if confident_percentage > 95:
+        confident_percentage -= 5
+
+    return confident_percentage / 100 
 #-----------------------------------------------------------------------------------------------------------------
 # ฟังก์ชันหาค่าอายุและเพศ
 def predict_age_gender(img_paths):
@@ -102,8 +107,9 @@ if uploaded_file is not None:
 
     # แสดงผลการทำนาย
     st.subheader("Prediction Results")
-    st.write(f"<span style='font-size:24px;'> <b>Age</b>: <span style='color:green;'><b>{int(age)}</b></span><span style='color:blue;'>± 1.96</span></span><span style='font-size:20px;'> years</span>", unsafe_allow_html=True)
-    st.write(f"<span style='font-size:24px;'> <b>Sex</b>: <span style='color:green;'><b>{gender}</b></span> </span><span style='font-size:20px;'>(Confidence: <span style='color:blue;'>{confidence.item()*100:.2f}%</span>) </span>", unsafe_allow_html=True)
+    st.write(f"<span style='font-size:24px;'> <b>Age</b>: <span style='color:green;'><b>{int(age)}</b></span></span><span style='font-size:20px;'> years</span>", unsafe_allow_html=True)
+    st.write(f"<span style='font-size:24px;'> <b>Sex</b>: <span style='color:green;'><b>{gender}</b></span> </span>", unsafe_allow_html=True)
+    st.write(f"<span style='font-size:22px;'> <b>Confidence</b>: <span style='color:blue;'>{confidence.item()*100:.2f}%</span> </span>", unsafe_allow_html=True)
 
 
     # เพิ่มส่วนแสดง BibTeX Citation
