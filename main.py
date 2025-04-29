@@ -95,25 +95,26 @@ def predict_age_gender(img_paths):
 
 #---------------------------------------------------------------------------------
 # recall
-recall_by_age = {
-    7: 0.76,
-    8: 0.67,
-    9: 0.68,
-    10: 0.49,
-    11: 0.30,
-    12: 0.54,
-    13: 0.36,
-    14: 0.17,
-    15: 0.37,
-    16: 0.66,
-    17: 0.29,
-    18: 0.30,
-    19: 0.27,
-    20: 0.14,
-    21: 0.16,
-    22: 0.02,
-    23: 0.00
+error_rate_by_age = {
+    7:  0.24,
+    8:  0.33,
+    9:  0.32,
+    10: 0.51,
+    11: 0.70,
+    12: 0.46,
+    13: 0.64,
+    14: 0.83,
+    15: 0.63,
+    16: 0.34,
+    17: 0.71,
+    18: 0.70,
+    19: 0.73,
+    20: 0.86,
+    21: 0.84,
+    22: 0.98,
+    23: 1.00
 }
+
 #------------------------------------------------------------------------------------
 # เก็บรูป
 import os
@@ -143,15 +144,15 @@ if uploaded_file is not None:
     
     # เรียกฟังก์ชันทำนายอายุและเพศจากภาพทั้งสอง
     age, gender, confidence = predict_age_gender([left_img, right_img])
-    recall_value = recall_by_age[int(age)]
+    error_rate_ = error_rate_by_age[int(age)]
 
     # แสดงผลการทำนาย
     st.subheader("Prediction Results")
     st.write(f"<span style='font-size:24px;'> <b>Age</b>: <span style='color:green;'><b>{int(age)}</b></span></span>"
-             f"<span style='font-size:20px;'> years  <span style='margin-left: 10px;'>(Recall: {recall_value * 100:.2f}% )</span></span>",
+             f"<span style='font-size:20px;'> years  <span style='margin-left: 10px;'>(Error rate: {error_rate_ * 100:.2f}% )</span></span>",
              unsafe_allow_html=True)
-    st.write(f"<span style='font-size:24px;'> <b>Sex</b>: <span style='color:green;'><b>{gender}</b></span> </span>", unsafe_allow_html=True)
-    st.write(f"<span style='font-size:22px;'> <b>Confidence</b>: <span style='color:blue;'>{confidence.item()*100:.2f}%</span> </span>", unsafe_allow_html=True)
+    st.write(f"<span style='font-size:24px;'> <b>Sex</b>: <span style='color:green;'><b>{gender}</b></span> </span>" 
+             f"<span style='margin-left: 10px;'><span style='font-size:20px;'> (Confidence: {confidence.item()*100:.2f}%)</span> </span>", unsafe_allow_html=True)
 
 
     # เพิ่มส่วนแสดง BibTeX Citation
