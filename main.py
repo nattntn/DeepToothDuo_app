@@ -76,10 +76,10 @@ def predict_age_gender(img_paths):
 
     if con_0 > con_1:
         selected_img = img_paths[0]
-        age_estimated = np.around(pred_list_regression[0][0])
+         = np.around(pred_list_regression[0][0])
     else:
         selected_img = img_paths[1]
-        age_estimated = np.around(pred_list_regression[1][0])
+        age_estimated = np.around(pred_list_regression[1][0]).item()
 
     model_selected = select_model(age_estimated)
 
@@ -87,7 +87,7 @@ def predict_age_gender(img_paths):
     height = width = model_selected.get_inputs()[0].shape[2]
     regression_result, classification_result = predict_image(selected_img, model_selected, height, width)
 
-    age_pred   = np.around(regression_result[0])
+    age_pred   = np.around(regression_result[0]).item()
     gender_pred = "Male" if classification_result[0] >= 0.5 else "Female"
     confidence = calculate_confident(classification_result[0])
 
