@@ -76,7 +76,7 @@ def predict_age_gender(img_paths):
 
     if con_0 > con_1:
         selected_img = img_paths[0]
-         = np.around(pred_list_regression[0][0])
+        age_estimated = np.around(pred_list_regression[0][0]).item()
     else:
         selected_img = img_paths[1]
         age_estimated = np.around(pred_list_regression[1][0]).item()
